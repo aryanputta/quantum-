@@ -2,7 +2,7 @@
 
 A hybrid quantum–classical benchmark system for telecom network routing
 optimization via explicit QUBO/Ising reformulation, hardware-aware QAOA,
-and ML-assisted coefficient adaptation.
+and ML-assisted coefficient adaptation
 
 ---
 
@@ -14,7 +14,7 @@ and a routing demand $(s, t)$, find a path $P \subseteq E$ minimizing:
 
 $$\min_{P} \;\sum_{e \in P} \bigl[\, w_l \cdot \text{lat}_e \;+\; w_c \cdot \text{cong}_e \;+\; w_p \cdot \text{loss}_e \,\bigr]$$
 
-subject to flow conservation at every node.
+subject to flow conservation at every node
 
 ---
 
