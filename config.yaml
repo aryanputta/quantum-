@@ -1,0 +1,103 @@
+project:
+  name: Hardware-Aware Quantum ML Routing Engine (HQMRE)
+  version: "1.0.0"
+  seed: 42
+
+data:
+  # SNAP / Rocketfuel dataset paths (populated by download_datasets.py)
+  snap_dir: data/snap
+  rocketfuel_dir: data/rocketfuel
+  caida_dir: data/caida
+  processed_dir: data/processed
+  # Which topology to use by default
+  default_topology: "synthetic_small"  # or "rocketfuel_1221", "snap_email"
+
+graph:
+  default_n_nodes: 20
+  default_edge_prob: 0.3
+  latency_range: [1, 50]        # ms
+  bandwidth_range: [10, 1000]   # Mbps
+  congestion_range: [0.0, 0.9]  # utilisation ratio
+  loss_range: [0.0, 0.05]       # packet loss fraction
+
+qubo:
+  penalty_path_validity: 10.0
+  penalty_flow_conservation: 8.0
+  penalty_capacity: 5.0
+  latency_weight: 1.0
+  congestion_weight: 2.0
+  loss_weight: 3.0
+
+ising:
+  validate_roundtrip: true
+
+classical:
+  sa:
+    num_reads: 100
+    num_sweeps: 2000
+    beta_range: [0.1, 10.0]
+    seed: 42
+  pt:
+    num_replicas: 8
+    num_sweeps: 2000
+    beta_min: 0.1
+    beta_max: 10.0
+    swap_interval: 50
+    seed: 42
+
+quantum:
+  p_depth: 3               # QAOA layers
+  optimizer: "COBYLA"
+  max_iter: 300
+  shots: 4096
+  backend: "aer_simulator" # aer_simulator | ibmq_xxx
+  use_noise: false
+  device_backend: null      # IBM backend name if real hardware
+
+hardware:
+  optimization_level: 3    # Qiskit transpiler level 0-3
+  routing_method: "sabre"
+  layout_method: "sabre"
+
+ml:
+  angle_predictor:
+    hidden_dims: [128, 256, 128]
+    lr: 0.001
+    epochs: 200
+    batch_size: 32
+    device: "auto"          # auto | cpu | cuda
+  qubo_predictor:
+    hidden_dims: [64, 128, 64]
+    lr: 0.001
+    epochs: 150
+    batch_size: 32
+    device: "auto"
+  train_size: 0.8
+  val_size: 0.1
+  checkpoint_dir: ml_optimizer/checkpoints
+
+benchmark:
+  n_trials: 20
+  tts_target_quality: 0.95  # fraction of best known solution
+  tts_success_threshold: 0.99
+  solvers:
+    - dijkstra
+    - greedy
+    - load_balanced
+    - simulated_annealing
+    - parallel_tempering
+    - qaoa_baseline
+    - qaoa_hardware_aware
+    - qaoa_ml_hardware
+
+experiments:
+  sweep_graph_sizes: [8, 12, 16, 20]
+  sweep_traffic_intensities: [0.2, 0.5, 0.8]
+  sweep_congestion_penalties: [1.0, 5.0, 10.0]
+  sweep_qaoa_depths: [1, 2, 3]
+  repeat_per_config: 10
+  save_dir: experiments/runs
+
+logging:
+  level: INFO
+  format: "%(asctime)s | %(levelname)s | %(name)s | %(message)s"

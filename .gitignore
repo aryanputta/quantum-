@@ -1,0 +1,122 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.whl
+MANIFEST
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.python-version
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+.ropeproject
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# Data files (large datasets - use download scripts)
+data/*.txt
+data/*.gz
+data/*.zip
+data/*.tar
+data/*.csv
+data/*.json
+!data/sample_*.json
+!data/sample_*.csv
+data/raw/
+data/processed/
+
+# Results / outputs
+results/*.png
+results/*.pdf
+results/*.csv
+results/*.json
+results/*.pkl
+results/raw/
+results/plots/
+
+# Experiment outputs
+experiments/runs/
+experiments/*.pkl
+
+# ML model weights
+ml_optimizer/checkpoints/
+ml_optimizer/*.pth
+ml_optimizer/*.pt
+*.pth
+*.pt
+*.ckpt
+
+# IBM Quantum credentials
+ibm_credentials.json
+.qiskit/
+qiskit_settings.ini
+
+# Secrets / API keys
+.env.local
+.env.*.local
+secrets.yaml
+credentials.yaml
+api_keys.txt
+*.key
+*.pem
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V*/
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Temp
+tmp/
+temp/
+*.tmp
+*.log
+*.bak
+*.orig
+*.rej
+
+# Profiling
+*.prof
+*.lprof
